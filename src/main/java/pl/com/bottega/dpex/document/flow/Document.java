@@ -20,9 +20,9 @@ public class Document implements Printable {
 
     private Money printingCost;
 
-    public Document(NumberGenerator numberGenerator, CreateDocumentCommand createDocumentCommand) {
+    public Document(DocumentNumber number, CreateDocumentCommand createDocumentCommand) {
         this.title = createDocumentCommand.getTitle();
-        this.number = numberGenerator.generate();
+        this.number = number;
         this.status = DocumentStatus.DRAFT;
     }
 

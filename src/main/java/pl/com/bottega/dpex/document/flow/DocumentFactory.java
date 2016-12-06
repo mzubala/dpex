@@ -18,7 +18,7 @@ public class DocumentFactory {
     }
 
     public Document create(CreateDocumentCommand cmd) {
-        return new Document(numberGenerator, cmd);
+        return new Document(numberGenerator.generate(), cmd);
     }
 
 }

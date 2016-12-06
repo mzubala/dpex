@@ -8,22 +8,16 @@ import org.mockito.runners.MockitoJUnitRunner;
 import pl.com.bottega.dpex.document.flow.commands.CreateDocumentCommand;
 import pl.com.bottega.dpex.document.flow.commands.PublishDocumentCommand;
 import pl.com.bottega.dpex.document.flow.number.DocumentNumber;
-import pl.com.bottega.dpex.document.flow.number.NumberGenerator;
 import pl.com.bottega.dpex.document.flow.printing.PrintingCostCalculator;
 import pl.com.bottega.dpex.document.shared.Money;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static pl.com.bottega.dpex.document.flow.DocumentStatus.DRAFT;
 import static pl.com.bottega.dpex.document.flow.DocumentStatus.PUBLISHED;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DocumentTest {
-
-    @Mock
-    private NumberGenerator numberGenerator;
 
     @Mock
     private DocumentNumber documentNumber;
@@ -44,9 +38,8 @@ public class DocumentTest {
 
     @Before
     public void setUp() {
-        when(numberGenerator.generate()).thenReturn(documentNumber);
         createCmd.setTitle(testTitle);
-        document = new Document(numberGenerator, createCmd);
+        document = new Document(documentNumber, createCmd);
         when(costCalculator.cost(document)).thenReturn(cost);
     }
 
