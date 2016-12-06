@@ -4,7 +4,7 @@ import pl.com.bottega.dpex.document.shared.Money;
 
 import java.math.BigDecimal;
 
-public class BMPrintCalculator implements PrintingCostCalculator {
+public class BWPrintCalculator implements PrintingCostCalculator {
 
     private static final Money COST_PER_PAGE = new Money(new BigDecimal(0.25));
 
