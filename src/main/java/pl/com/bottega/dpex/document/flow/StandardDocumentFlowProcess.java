@@ -3,13 +3,6 @@ package pl.com.bottega.dpex.document.flow;
 import pl.com.bottega.dpex.document.flow.commands.*;
 import pl.com.bottega.dpex.document.flow.infrastructure.InMemoryDocumentRepository;
 import pl.com.bottega.dpex.document.flow.number.DocumentNumber;
-import pl.com.bottega.dpex.document.flow.number.ISONumberGenerator;
-import pl.com.bottega.dpex.document.flow.number.NumberGenerator;
-import pl.com.bottega.dpex.document.flow.number.QEPNumberGenerator;
-import pl.com.bottega.dpex.document.flow.printing.BWPrintCalculator;
-import pl.com.bottega.dpex.document.flow.printing.PrintingCostCalculator;
-import pl.com.bottega.dpex.document.flow.printing.RGBCostCalculator;
-import pl.com.bottega.dpex.document.shared.Settings;
 
 public class StandardDocumentFlowProcess implements DocumentFlowProcess {
 
