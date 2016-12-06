@@ -13,25 +13,19 @@ import pl.com.bottega.dpex.document.shared.Settings;
 
 public class StandardDocumentFlowProcess implements DocumentFlowProcess {
 
-    private NumberGenerator numberGenerator;
     private DocumentRepository documentRepository;
-    private PrintingCostCalculator printingCostCalculator;
+    private DocumentFactory documentFactory;
+    private PrintingCostCalculatorFactory printingCostCalculatorFactory;
 
     public StandardDocumentFlowProcess() {
-        if (Settings.CURRENT_SYSTEM.equals("ISO"))
-            numberGenerator = new ISONumberGenerator();
-        else
-            numberGenerator = new QEPNumberGenerator();
         documentRepository = new InMemoryDocumentRepository();
-        if(Settings.CURRENT_PRINTER.equals("COLOR"))
-            printingCostCalculator = new RGBCostCalculator();
-        else
-            printingCostCalculator = new BWPrintCalculator();
+        documentFactory = new DocumentFactory();
+        printingCostCalculatorFactory = new PrintingCostCalculatorFactory();
     }
 
     @Override
     public DocumentNumber create(CreateDocumentCommand cmd) {
-        Document document = new Document(numberGenerator, cmd);
+        Document document = documentFactory.create(cmd);
         documentRepository.put(document);
         return document.getNumber();
     }
@@ -49,7 +43,7 @@ public class StandardDocumentFlowProcess implements DocumentFlowProcess {
     @Override
     public void publish(PublishDocumentCommand cmd) {
         Document document = documentRepository.get(cmd.getDocumentNumber());
-        document.publish(printingCostCalculator, cmd);
+        document.publish(printingCostCalculatorFactory.create(), cmd);
     }
 
     @Override
