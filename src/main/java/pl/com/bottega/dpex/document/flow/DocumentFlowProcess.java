@@ -6,6 +6,7 @@ import pl.com.bottega.dpex.document.flow.commands.CreateDocumentCommand;
 import pl.com.bottega.dpex.document.flow.commands.CreateNewVersionCommand;
 import pl.com.bottega.dpex.document.flow.commands.PublishDocumentCommand;
 import pl.com.bottega.dpex.document.flow.commands.VerifyDocumentCommand;
+import pl.com.bottega.dpex.document.flow.number.DocumentNumber;
 
 public interface DocumentFlowProcess {
 

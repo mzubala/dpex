@@ -3,7 +3,7 @@ package pl.com.bottega.dpex.document.flow.commands;
 import java.util.Collection;
 
 import pl.com.bottega.dpex.document.flow.DepartmentId;
-import pl.com.bottega.dpex.document.flow.DocumentNumber;
+import pl.com.bottega.dpex.document.flow.number.DocumentNumber;
 
 public class PublishDocumentCommand {
 
