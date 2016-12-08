@@ -6,4 +6,5 @@ public interface Printable {
 
     int picturesCount();
 
+    DocumentType getType();
 }

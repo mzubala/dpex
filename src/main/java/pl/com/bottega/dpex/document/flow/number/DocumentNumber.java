@@ -4,13 +4,16 @@ public class DocumentNumber {
 
 	private String number;
 
-
 	public DocumentNumber(String number) {
 		this.number = number;
 	}
-	
+
 	@Override
 	public String toString() {
+		return number;
+	}
+
+	public String getNumber() {
 		return number;
 	}
 

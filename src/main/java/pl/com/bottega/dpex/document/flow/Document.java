@@ -4,6 +4,7 @@ import pl.com.bottega.dpex.document.flow.commands.CreateDocumentCommand;
 import pl.com.bottega.dpex.document.flow.commands.PublishDocumentCommand;
 import pl.com.bottega.dpex.document.flow.number.DocumentNumber;
 import pl.com.bottega.dpex.document.flow.number.NumberGenerator;
+import pl.com.bottega.dpex.document.flow.printing.DocumentType;
 import pl.com.bottega.dpex.document.flow.printing.Printable;
 import pl.com.bottega.dpex.document.flow.printing.PrintingCostCalculator;
 import pl.com.bottega.dpex.document.shared.Money;
@@ -19,11 +20,13 @@ public class Document implements Printable {
     private DocumentStatus status;
 
     private Money printingCost;
+    private DocumentType documentType;
 
     public Document(DocumentNumber number, CreateDocumentCommand createDocumentCommand) {
         this.title = createDocumentCommand.getTitle();
         this.number = number;
         this.status = DocumentStatus.DRAFT;
+        this.documentType = createDocumentCommand.getDocumentType();
     }
 
     public void publish(PrintingCostCalculator printingCostCalculator, PublishDocumentCommand publishDocumentCommand) {
@@ -43,6 +46,11 @@ public class Document implements Printable {
     public int picturesCount() {
         // TODO count pics in content
         return 0;
+    }
+
+    @Override
+    public DocumentType getType() {
+        return documentType;
     }
 
     public DocumentNumber getNumber() {

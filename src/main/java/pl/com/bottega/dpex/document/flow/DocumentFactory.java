@@ -1,9 +1,7 @@
 package pl.com.bottega.dpex.document.flow;
 
 import pl.com.bottega.dpex.document.flow.commands.CreateDocumentCommand;
-import pl.com.bottega.dpex.document.flow.number.ISONumberGenerator;
-import pl.com.bottega.dpex.document.flow.number.NumberGenerator;
-import pl.com.bottega.dpex.document.flow.number.QEPNumberGenerator;
+import pl.com.bottega.dpex.document.flow.number.*;
 import pl.com.bottega.dpex.document.shared.Settings;
 
 public class DocumentFactory {
@@ -15,6 +13,8 @@ public class DocumentFactory {
             numberGenerator = new ISONumberGenerator();
         else
             numberGenerator = new QEPNumberGenerator();
+        numberGenerator = new AuditorNumberGenerator(numberGenerator);
+        numberGenerator = new DemoNumberGenerator(numberGenerator);
     }
 
     public Document create(CreateDocumentCommand cmd) {
