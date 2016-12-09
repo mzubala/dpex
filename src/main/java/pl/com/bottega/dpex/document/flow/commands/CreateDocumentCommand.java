@@ -6,6 +6,7 @@ public class CreateDocumentCommand {
 
 	private String title;
 	private DocumentType documentType;
+	private String author;
 
 	public String getTitle() {
 		return title;
@@ -21,5 +22,13 @@ public class CreateDocumentCommand {
 
 	public void setDocumentType(DocumentType documentType) {
 		this.documentType = documentType;
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 }
