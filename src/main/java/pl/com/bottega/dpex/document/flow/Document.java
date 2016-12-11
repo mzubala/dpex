@@ -49,16 +49,6 @@ public class Document implements Printable {
         // TODO further publish processing
     }
 
-    public void export(DocumentExporter exporter) {
-        exporter.start();
-        exporter.addContent(content);
-        exporter.addTitle(title);
-        exporter.addDocumentType(documentType);
-        exporter.addExpirationDate(expirationDate);
-        exporter.addStatus(status);
-        exporter.finish();
-    }
-
     @Override
     public int pagesCount() {
         if(content == null)
