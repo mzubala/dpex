@@ -7,15 +7,11 @@ import pl.com.bottega.dpex.document.flow.number.NumberGenerator;
 import pl.com.bottega.dpex.document.flow.printing.DocumentType;
 import pl.com.bottega.dpex.document.flow.printing.Printable;
 import pl.com.bottega.dpex.document.flow.printing.PrintingCostCalculator;
-import pl.com.bottega.dpex.document.flow.validation.DocumentValidator;
 import pl.com.bottega.dpex.document.shared.Money;
-
-import java.util.Date;
 
 public class Document implements Printable {
 
     private static final int CHARS_PER_PAGE = 500;
-    private final String author;
 
     private DocumentNumber number;
 
@@ -25,27 +21,17 @@ public class Document implements Printable {
 
     private Money printingCost;
     private DocumentType documentType;
-    private Date expirationDate;
 
     public Document(DocumentNumber number, CreateDocumentCommand createDocumentCommand) {
         this.title = createDocumentCommand.getTitle();
         this.number = number;
         this.status = DocumentStatus.DRAFT;
         this.documentType = createDocumentCommand.getDocumentType();
-        this.author = createDocumentCommand.getAuthor();
     }
 
-    public void verify(DocumentValidator documentValidator) {
-        documentValidator.validate(this, DocumentStatus.VERIFIED);
-        this.status = DocumentStatus.VERIFIED;
-    }
-
-    public void publish(PrintingCostCalculator printingCostCalculator, DocumentValidator validator,
-                        PublishDocumentCommand publishDocumentCommand) {
-        validator.validate(this, DocumentStatus.PUBLISHED);
+    public void publish(PrintingCostCalculator printingCostCalculator, PublishDocumentCommand publishDocumentCommand) {
         this.printingCost = printingCostCalculator.cost(this);
         this.status = DocumentStatus.PUBLISHED;
-
         // TODO further publish processing
     }
 
@@ -83,15 +69,4 @@ public class Document implements Printable {
         return printingCost;
     }
 
-    public Date getExpirationDate() {
-        return expirationDate;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public String getContent() {
-        return content;
-    }
 }

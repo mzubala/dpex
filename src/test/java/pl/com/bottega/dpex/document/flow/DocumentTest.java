@@ -9,11 +9,9 @@ import pl.com.bottega.dpex.document.flow.commands.CreateDocumentCommand;
 import pl.com.bottega.dpex.document.flow.commands.PublishDocumentCommand;
 import pl.com.bottega.dpex.document.flow.number.DocumentNumber;
 import pl.com.bottega.dpex.document.flow.printing.PrintingCostCalculator;
-import pl.com.bottega.dpex.document.flow.validation.DocumentValidator;
 import pl.com.bottega.dpex.document.shared.Money;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static pl.com.bottega.dpex.document.flow.DocumentStatus.DRAFT;
 import static pl.com.bottega.dpex.document.flow.DocumentStatus.PUBLISHED;
@@ -38,9 +36,6 @@ public class DocumentTest {
     @Mock
     private Money cost;
 
-    @Mock
-    private DocumentValidator documentValidator;
-
     @Before
     public void setUp() {
         createCmd.setTitle(testTitle);
@@ -59,36 +54,22 @@ public class DocumentTest {
     }
 
     @Test
-    public void shouldValidateDocumentOnVerify() {
-        document.verify(documentValidator);
-
-        verify(documentValidator).validate(document, DocumentStatus.VERIFIED);
-    }
-
-    @Test
     public void shouldBeDraftAfterCreate() {
         assertThat(document.getStatus()).isEqualTo(DRAFT);
     }
 
     @Test
     public void shouldCalculateCostOnPublish() {
-        document.publish(costCalculator, documentValidator, publishCmd);
+        document.publish(costCalculator, publishCmd);
 
         assertThat(document.getPrintingCost()).isEqualTo(cost);
     }
 
     @Test
     public void shouldChnageStatusOnPublish() {
-        document.publish(costCalculator, documentValidator, publishCmd);
+        document.publish(costCalculator, publishCmd);
 
         assertThat(document.getStatus()).isEqualTo(PUBLISHED);
-    }
-
-    @Test
-    public void shouldValidateDocumentOnPublish() {
-        document.publish(costCalculator, documentValidator, publishCmd);
-
-        verify(documentValidator).validate(document, DocumentStatus.PUBLISHED);
     }
 
 }
