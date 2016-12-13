@@ -2,7 +2,6 @@ package pl.com.bottega.dpex.document.flow;
 
 import pl.com.bottega.dpex.document.flow.command.CreateDocumentCommand;
 import pl.com.bottega.dpex.document.flow.number.DocumentNumber;
-import pl.com.bottega.dpex.document.flow.number.NumberGenerator;
 import pl.com.bottega.dpex.document.flow.printing.PrintCostCalculator;
 import pl.com.bottega.dpex.document.flow.printing.Printable;
 import pl.com.bottega.dpex.document.shared.Money;
@@ -16,8 +15,8 @@ public class Document implements Printable {
     private Money printingCost = Money.ZERO;
     private DocumentState state;
 
-    public Document(NumberGenerator numberGenerator, CreateDocumentCommand cmd) {
-        this.number = numberGenerator.generate(cmd.getDocumentType());
+    public Document(DocumentNumber number, CreateDocumentCommand cmd) {
+        this.number = number;
         this.title = cmd.getTitle();
         this.type = cmd.getDocumentType();
         this.content = "";

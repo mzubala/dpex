@@ -47,10 +47,9 @@ public class DocumentTest {
     }
 
     @Test
-    public void shouldGenerateNumberOnCreate() {
+    public void shouldSetNumberOnCreate() {
         //then
         assertThat(document.getNumber()).isEqualTo(documentNumber);
-        verify(numberGenerator).generate(DocumentType.PROCEDURE);
     }
 
     @Test
@@ -66,8 +65,7 @@ public class DocumentTest {
     }
 
     private Document createDocument() {
-        when(numberGenerator.generate(DocumentType.PROCEDURE)).thenReturn(documentNumber);
-        return new Document(numberGenerator, createCommand);
+        return new Document(documentNumber, createCommand);
     }
 
     class MockNumberGenerator implements NumberGenerator {
