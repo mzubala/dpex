@@ -1,6 +1,7 @@
 package pl.com.bottega.dpex.document.flow;
 
 import pl.com.bottega.dpex.document.flow.command.*;
+import pl.com.bottega.dpex.document.flow.number.DocumentNumber;
 
 public interface DocumentFlowProcess {
 
